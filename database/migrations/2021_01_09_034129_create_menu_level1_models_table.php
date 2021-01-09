@@ -18,6 +18,7 @@ class CreateMenuLevel1ModelsTable extends Migration
             $table->string('menu_level_1_nama',255);
             $table->string('menu_level_1_router',255);
             $table->string('menu_level_1_icon',255);
+            $table->integer('menu_level_1_status')->nullable();
         });
     }
 

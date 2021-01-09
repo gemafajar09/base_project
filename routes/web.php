@@ -6,11 +6,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 // =======================BACKEND==========================================
-Route::post('/logins', 'LoginController@login')->name('login');
-Route::get('/logout', 'LoginController@logout')->name('logout');
+Route::post('/logins', 'Auth\LoginController@login')->name('login');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 // =======================================================================
-Route::get('/admin', 'LoginController@index')->name('admin')->middleware('authcek');
-Route::get('/dashboard', 'BackendController@index')->name('dashboard')->middleware('ceklogin');
+Route::get('/admin', 'Auth\LoginController@index')->name('admin')->middleware('authcek');
+Route::get('/dashboard', 'Backend\BackendController@index')->name('dashboard')->middleware('ceklogin');
 
 
 // CRUD MENU LEVEL 1

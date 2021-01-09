@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
@@ -33,8 +34,12 @@ class LoginController extends Controller
             $cekDataLogin = DB::table('tb_admin')->where('username',$username)->where('password',$password)->first();
             if($cekDataLogin == TRUE)
             {
+                // cek akses user
+                $hakAkses = DB::table('tb_akses')->leftjoin('tb_menu_level_1','tb_akses.menu_level_1_id','tb_menu_level_1.menu_level_1_id')->where('admin_id',$cekDataLogin->admin_id)->get();
+                // ==============
                 $r->session()->put("admin_id", $cekDataLogin->admin_id);
                 $r->session()->put("admin_nama", $cekDataLogin->admin_nama);
+                $r->session()->put("hak_akses", $hakAkses);
                 return redirect('dashboard')->with('pesan','Selamat Datang');
             }else{
                 return back()->with('error','Silahkan Login Kembali');
@@ -68,6 +73,7 @@ class LoginController extends Controller
     {
     	$r->session()->forget('admin_id');
         $r->session()->forget('admin_nama');
+        $r->session()->forget('hak_akses');
         $r->session()->flush();
     	return redirect('admin')->with('pesan', 'Success Logout.');
     }
