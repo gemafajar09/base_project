@@ -1,4 +1,3 @@
-<script src="{{asset('/plugins/jquery/jquery.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="//cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 <script src="{{asset('/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
