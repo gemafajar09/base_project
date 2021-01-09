@@ -484,6 +484,7 @@ class ComposerStaticInit3c99ea3528832c021b1c379666255577
     );
 
     public static $classMap = array (
+        'App\\AksesModel' => __DIR__ . '/../..' . '/app/AksesModel.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\BackendController' => __DIR__ . '/../..' . '/app/Http/Controllers/BackendController.php',
