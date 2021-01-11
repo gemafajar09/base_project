@@ -8,10 +8,11 @@ Route::get('/', function () {
 // =======================BACKEND==========================================
 Route::post('/logins', 'Auth\LoginController@login')->name('login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-// =======================================================================
+// =======================LOGIN============================================
 Route::get('/admin', 'Auth\LoginController@index')->name('admin')->middleware('authcek');
 Route::get('/dashboard', 'Backend\BackendController@index')->name('dashboard')->middleware('ceklogin');
-
+// =======================ENGINE============================================
+Route::get('/akses', 'Engine\AksesController@index')->name('akses')->middleware('ceklogin');
 
 // CRUD MENU LEVEL 1
 Route::get('/menu-engine', 'Engine\EngineController@index')->name('menu-engine')->middleware('ceklogin');

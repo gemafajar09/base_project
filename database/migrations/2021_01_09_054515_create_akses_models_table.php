@@ -16,9 +16,7 @@ class CreateAksesModelsTable extends Migration
         Schema::create('tb_akses', function (Blueprint $table) {
             $table->id('id_akses');
             $table->integer('admin_id');
-            $table->integer('menu_level_1_id');
-            $table->integer('menu_level_2_id')->nullable();
-            $table->integer('menu_level_3_id')->nullable();
+            $table->integer('menu_id');
         });
     }
 

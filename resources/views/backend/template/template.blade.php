@@ -19,10 +19,25 @@
         Admin&nbsp;<i style="color:#093f91" class="fa fa-user-circle"></i>
         </a>
       </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link" role="button">
-        <i style="color:#fc035a" class="fas fa-cogs"></i>
+      <li class="nav navbar-nav dropdown">
+        <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i style="color:#fc035a" class="fas fa-cogs"></i>
         </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+          <a class="dropdown-item" href="{{ route('menu-engine') }}">
+            <i class="fas fa-users-cog fa-sm fa-fw mr-2 text-gray-400"></i>
+            Menu Engine
+          </a>
+          <a class="dropdown-item" href="{{route('akses')}}">
+            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+            Akses Akun
+          </a>
+          <a class="dropdown-item" href="{{route('akses')}}">
+            <i class="fas fa-code-branch fa-sm fa-fw mr-2 text-gray-400"></i>
+            Routing
+          </a>
+          {{-- <div class="dropdown-divider"></div> --}}
+        </div>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link" role="button">
