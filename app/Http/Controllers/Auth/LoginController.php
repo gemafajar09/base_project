@@ -35,7 +35,7 @@ class LoginController extends Controller
             if($cekDataLogin == TRUE)
             {
                 // cek akses user
-                $hakAkses = DB::table('tb_akses')->leftjoin('tb_menu_level_1','tb_akses.menu_level_1_id','tb_menu_level_1.menu_level_1_id')->where('admin_id',$cekDataLogin->admin_id)->get();
+                $hakAkses = DB::table('tb_akses')->leftjoin('tb_menu','tb_akses.menu_id','tb_menu.menu_id')->where('tb_akses.admin_id',$cekDataLogin->admin_id)->where('tb_menu.menu_level','1')->get();
                 // ==============
                 $r->session()->put("admin_id", $cekDataLogin->admin_id);
                 $r->session()->put("admin_nama", $cekDataLogin->admin_nama);

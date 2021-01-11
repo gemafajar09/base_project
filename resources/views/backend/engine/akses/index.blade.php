@@ -1,71 +1,87 @@
 @extends('backend.template.template')
 @section('content')
-
+<style>
+    input{
+        padding-right: 30%;position: absolute;left: 80%;
+    }
+</style>
 <div class="row py-3">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card card-outline card-info">
             <div class="card-header">
             <div class="float-left">
-                <h3 class="card-title">Menu Engine</h3>
+                <h3 class="card-title">Akses Akun</h3>
             </div>
-                <div class="float-right">
-                    <a href="{{ route('menu-engine.add') }}" class="btn btn-outline-primary my-2 btn-sm"><i class="fa fa-plus"></i> Add</a>
-                </div>
             </div>
             <div class="card-body">
                 @if(session()->has('message'))
-                <div class="alert alert-success" style="display:none" id="success">
-                    <strong>{{ session()->get('message') }}</strong>
-                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                </div>
-                @endif                
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            {{-- menu1 --}}
-                            @foreach($menu as $menu1)
-                            <div class="col-md-3">
-                                <div class="card card-outline card-info">
-                                    <div class="card-body">
-                                        <span><a onclick="mHapus('{{ route('menu-engine.delete', encrypt($menu1->menu_id)) }}')" role="button" style="color:rgb(44, 136, 223); cursor: pointer;" class="fa fa-trash"></a></span>
-                                        <span><a href="{{ route('menu-engine.edit', encrypt($menu1->menu_id) ) }}" style="color:rgb(149, 213, 32)" class="fa fa-edit"></a></span>
-                                        <strong>
-                                            <i style="padding-left:5%" class="{{$menu1->menu_icon}}"></i>
-                                            {{$menu1->menu_nama}}
-                                        </strong> 
-                                        <br>
+                    <div class="alert alert-success" style="display:none" id="success">
+                        <strong>{{ session()->get('message') }}</strong>
+                        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                    </div>
+                @endif    
+                {{-- form akses --}}
+                <form action="" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="">Nama User</label>
+                                        <select name="admin_id" class="form-control" id="">
+                                            <option value="">-SELECT-</option>
+                                            @foreach($user as $user)
+                                            <option value="{{$user->admin_id}}">{{$user->admin_nama}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                @foreach($menu1 as $menu1)
+                                <div class="col-md-3">
+                                    <div class="card card-outline card-info">
+                                        <div class="card-body">
+                                            <span><i style="color:rgb(22, 56, 169)" class="far fa-circle"></i></span>
+                                                <strong>{{$menu1->menu_nama}}</strong> 
+                                                <input type="checkbox" value="{{$menu1->menu_id}}" name="menu1[]">
+                                            <br>
                                             {{-- menu2 --}}
                                             <?php $menu2 = DB::table('tb_menu')->where('menu_level','2')->where('menu_drop_id',$menu1->menu_id)->get() ?>
                                             @foreach($menu2 as $menu2)
-                                            <span><a onclick="mHapus('{{ route('menu-engine.delete', encrypt($menu2->menu_id)) }}')" role="button" style="color:rgb(44, 136, 223); cursor: pointer;" class="fa fa-trash"></a></span>
-                                            <span><a href="{{ route('menu-engine.edit', encrypt($menu2->menu_id) ) }}" style="color:rgb(149, 213, 32)" class="fa fa-edit"></a></span>
+                                            <i style=" color:rgb(229, 233, 19)" class="far fa-circle"></i>
                                             <strong style="padding-left: 5%">
-                                                <i style="padding-left:5%; color:rgb(229, 233, 19)" class="far fa-circle"></i>
                                                 {{$menu2->menu_nama}}
+                                                <input type="checkbox" value="{{$menu2->menu_id}}" name="menu1[]">
                                             </strong> 
                                             <br>
                                                 {{-- menu3 --}}
                                                 <?php $menu3 = DB::table('tb_menu')->where('menu_level','3')->where('menu_drop_id',$menu2->menu_id)->get() ?>
                                                 @foreach($menu3 as $menu3)
-                                                    <span><a onclick="mHapus('{{ route('menu-engine.delete', encrypt($menu3->menu_id)) }}')" role="button" style="color:rgb(44, 136, 223); cursor: pointer;" class="fa fa-trash"></a></span>
-                                                    <span><a href="{{ route('menu-engine.edit', encrypt($menu3->menu_id) ) }}" style="color:rgb(149, 213, 32)" class="fa fa-edit"></a></span>
+                                                    <i style="padding-left:5%; color:rgb(174, 77, 223)" class="far fa-circle"></i>
                                                     <strong style="padding-left: 10%">
-                                                        <i style="padding-left:5%; color:rgb(174, 77, 223)" class="far fa-circle"></i>
                                                         {{$menu3->menu_nama}}
+                                                        <input type="checkbox" value="{{$menu3->menu_id}}" name="menu1[]">
                                                     </strong> 
                                                     <br>
                                                 @endforeach
                                                 {{-- menu3 --}}
                                             @endforeach
                                             {{-- menu2 --}}
+                                        </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
-                            @endforeach
-                            {{-- menu1 --}}
+                        </div>
+                        <div class="col-md-2 mx-auto">
+                            <button type="submit" class="btn btn-outline-primary btn-block">Save</button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
