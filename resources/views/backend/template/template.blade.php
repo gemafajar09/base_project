@@ -4,6 +4,8 @@
 @include('backend.template.component.head')
   {{-- /head --}}
 <body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
+<script src="{{asset('/plugins/jquery/jquery.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <div class="wrapper">
 
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">

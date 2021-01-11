@@ -20,3 +20,9 @@ Route::get('/menu-engine/add', 'Engine\EngineController@add')->name('menu-engine
 Route::get('/menu-engine/edit/{id}', 'Engine\EngineController@edit')->name('menu-engine.edit')->middleware('ceklogin');
 Route::post('/menu-engine/save', 'Engine\EngineController@save')->name('menu-engine.save')->middleware('ceklogin');
 Route::delete('/menu-engine/delete/{id}', 'Engine\EngineController@destroy')->name('menu-engine.delete');
+
+// PENGATURAN HAK AKSES
+Route::post('/akses/insert', 'Engine\AksesController@saveInsert')->name('akses.insert')->middleware('ceklogin');
+Route::post('/akses/delete', 'Engine\AksesController@saveDelete')->name('akses.delete')->middleware('ceklogin');
+
+
