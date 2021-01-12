@@ -36,10 +36,16 @@ class LoginController extends Controller
             {
                 // cek akses user
                 $hakAkses = DB::table('tb_akses')->leftjoin('tb_menu','tb_akses.menu_id','tb_menu.menu_id')->where('tb_akses.admin_id',$cekDataLogin->admin_id)->where('tb_menu.menu_level','1')->get();
+
+                $router = DB::table('tb_router')->get();
                 // ==============
                 $r->session()->put("admin_id", $cekDataLogin->admin_id);
                 $r->session()->put("admin_nama", $cekDataLogin->admin_nama);
                 $r->session()->put("hak_akses", $hakAkses);
+                
+                //session router
+                $r->session()->put("router", $router);
+
                 return redirect('dashboard')->with('pesan','Selamat Datang');
             }else{
                 return back()->with('error','Silahkan Login Kembali');
