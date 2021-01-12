@@ -34,7 +34,7 @@
             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
             Akses Akun
           </a>
-          <a class="dropdown-item" href="{{route('akses')}}">
+          <a class="dropdown-item" href="{{route('router')}}">
             <i class="fas fa-code-branch fa-sm fa-fw mr-2 text-gray-400"></i>
             Routing
           </a>
