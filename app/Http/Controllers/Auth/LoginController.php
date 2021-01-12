@@ -53,25 +53,40 @@ class LoginController extends Controller
         }
     }
 
+
     public function register(Request $r)
     {
-        $admin_nama = $r->admin_nama;
-        $username = $r->username;
-        $password = $r->password;
-        $repeat_password = $r->repeat_password;
-        if($password == $repeat_password)
-        {
-            $pass = hash("sha512", md5($r->password));
-            DB::table('tb_admin')->insert([
-                'admin_nama' => $admin_nama,
-                'username' => $username,
-                'password' => $pass,
-                'repeat_password' => $repeat_password
-            ]);
+        return view('backend.auth.register');
+    }
 
-            return back()->with('pesan','Data Berhasil Di Inputkan.');
-        }else{
-            return back()->with('pesan','Data Gagal Di Inputkan.');
+    public function aksiregister(Request $r)
+    {
+        $validator = Validator::make($r->all(), [
+            'admin_nama'            => 'required',
+            'username'              => 'required|unique:tb_admin,username',
+            'password'              => 'required',
+            'repeat_password'       => 'required',
+        ]);
+        if ($validator->fails()) {
+            return back()->with('pesan','Data Gagal Di Inputkan');
+        } else {
+            $admin_nama = $r->admin_nama;
+            $username = $r->username;
+            $password = $r->password;
+            $repeat_password = $r->repeat_password;
+            if($password == $repeat_password)
+            {
+                $pass = hash("sha512", md5($r->password));
+                DB::table('tb_admin')->insert([
+                    'admin_nama' => $admin_nama,
+                    'username' => $username,
+                    'password' => $pass,
+                    'repeat_password' => $repeat_password
+                ]);
+                return redirect('admin');
+            }else{
+                return back()->with('pesan','Data Gagal Di Inputkan');
+            }
         }
     }
 
