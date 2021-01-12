@@ -26,21 +26,26 @@ Route::post('/akses/insert', 'Engine\AksesController@saveInsert')->name('akses.i
 Route::post('/akses/delete', 'Engine\AksesController@saveDelete')->name('akses.delete')->middleware('ceklogin');
 
 // CRUD ROUTER
-Route::get('/router', 'Engine\RouterController@index')->name('router')->middleware('ceklogin');
-Route::get('/router/add', 'Engine\RouterController@add')->name('router.add')->middleware('ceklogin');
-Route::get('/router/edit/{id}', 'Engine\RouterController@edit')->name('router.edit')->middleware('ceklogin');
-Route::post('/router/save', 'Engine\RouterController@save')->name('router.save')->middleware('ceklogin');
-Route::delete('/router/delete/{id}', 'Engine\RouterController@destroy')->name('router.delete');
+// Route::get('/router', 'Engine\RouterController@index')->name('router')->middleware('ceklogin');
+// Route::get('/router/add', 'Engine\RouterController@add')->name('router.add')->middleware('ceklogin');
+// Route::get('/router/edit/{id}', 'Engine\RouterController@edit')->name('router.edit')->middleware('ceklogin');
+// Route::post('/router/save', 'Engine\RouterController@save')->name('router.save')->middleware('ceklogin');
+// Route::delete('/router/delete/{id}', 'Engine\RouterController@destroy')->name('router.delete');
 
-
-//panggil session router
-foreach(session()->get('router') as $router){
-    if($router->router_name == NULL AND $router->router_middleware == NULL){
-        Route::$router->router_type . "('" . $router->router_url ."', '" . $router->router_controller . "')";
-    }elseif($router->router_name != NULL AND $router->router_middleware == NULL){
-        Route::$router->router_type . "('" . $router->router_url ."' ,'" . $router->router_controller . "')->name('". $router->router_name . "')";
-    }elseif($router->router_name != NULL AND $router->router_middleware != NULL){
-        Route::$router->router_type . "('" . $router->router_url ."', '" . $router->router_controller . "')->name('" . $router->router_name. "')->middleware('" .$router->router_middleware . "')";
+$sessionUser = session()->get('admin_id');
+if($sessionUser != '')
+{
+    foreach(session()->get('router') as $router){
+        if($router->router_name == NULL AND $router->router_middleware == NULL){
+            Route::$router->router_type . "('" . $router->router_url ."', '" . $router->router_controller . "')";
+        }elseif($router->router_name != NULL AND $router->router_middleware == NULL){
+            Route::$router->router_type . "('" . $router->router_url ."' ,'" . $router->router_controller . "')->name('". $router->router_name . "')";
+        }elseif($router->router_name != NULL AND $router->router_middleware != NULL){
+            Route::$router->router_type . "('" . $router->router_url ."', '" . $router->router_controller . "')->name('" . $router->router_name. "')->middleware('" .$router->router_middleware . "')";
+        }
     }
+}else{
+    
 }
+//panggil session router
 
